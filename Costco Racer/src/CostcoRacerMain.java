@@ -23,12 +23,13 @@ public class CostcoRacerMain extends JPanel
 	boolean[] keys = new boolean[300];
 	boolean[] keysToggled = new boolean[300];
 	boolean[] mouse = new boolean[200];
+	Misc misc = new Misc();
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
+		
 	}
 
 	public void update() throws InterruptedException {
