@@ -1,5 +1,8 @@
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,7 +12,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,31 +22,64 @@ import javax.swing.Timer;
 public class CostcoRacerMain extends JPanel
 		implements ActionListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 	private static final long serialVersionUID = 1L;
-
 	int screenWidth = 1000;
 	int screenHeight = 1000;
-	boolean[] keys = new boolean[300];
-	boolean[] keysToggled = new boolean[300];
-	boolean[] mouse = new boolean[200];
-	BufferedImage img;
+	static boolean[] keys = new boolean[300];
+	static boolean[] keysToggled = new boolean[300];
+	static boolean[] mouse = new boolean[200];
+	static Point mPos;
+	MenuState m = new MenuState();
+	Font f = new Font("PixelFJVerdana12pt", 1, 72);
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(img, 0, 0, 500,500, null);
+		m.draw(g);
+		g.setFont(f);
+		g.drawString("Hello", 200, 200);
+
 	}
 
 	public void update() throws InterruptedException {
-		
+		mPos = getMousePos();
+		//System.out.println(mPos.toStr());
+		m.update();
+
 	}
 
 	private void init() {
-	Misc.loadImage("/Res/strawberry.png");
-		
+		try {
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("/PixelFJVerdana12pt.ttf")));
+		} catch (IOException | FontFormatException e) {
+			System.out.println("failed");
+			// Handle exception
+		}
+		for(String s : GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()) {
+			System.out.println(s);
+		}
+		m.init();
+
 	}
 
 	// ==================code above ===========================
+
+	public static boolean[] getKeys() {
+		return keys;
+	}
+
+	public static boolean[] getKeysToggled() {
+		return keysToggled;
+	}
+
+	public static boolean[] getMouse() {
+		return mouse;
+	}
+
+	public void setMouse(boolean[] mouse) {
+		this.mouse = mouse;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -50,10 +87,21 @@ public class CostcoRacerMain extends JPanel
 		try {
 			update();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		repaint();
+	}
+
+	public static Point getmPos() {
+		return mPos;
+	}
+
+	public Point getMousePos() {
+		try {
+			return new Point(this.getMousePosition().x, this.getMousePosition().y);
+		} catch (Exception e) {
+			return mPos;
+		}
 	}
 
 	public static void main(String[] arg) {
@@ -74,12 +122,12 @@ public class CostcoRacerMain extends JPanel
 
 		f.add(this);
 
+		init();
+
 		t = new Timer(15, this);
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-
-		init();
 
 	}
 
@@ -150,4 +198,53 @@ public class CostcoRacerMain extends JPanel
 
 	}
 
+}
+
+class Point {
+	int x, y;
+
+	public Point(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+
+	public double distanceTo(Point p2) {
+		return Math.sqrt((this.x - p2.x) * (this.x - p2.x) + (this.y - p2.y) * (this.y - p2.y));
+	}
+
+	public double angleTo(Point p2) {
+		try {
+			return Math.atan2(this.y - p2.y, this.x - p2.x);
+		} catch (Exception e) {
+
+		}
+		return 0;
+	}
+
+	public boolean inside(Rect r) {
+		return (x > r.pos.x && x < r.pos.x + r.w && y > r.pos.y && y < r.pos.y + r.h);
+	}
+
+	public String toStr() {
+		return ("(" + this.x + ", " + this.y + ")");
+	}
+}
+
+class Rect {
+	Point pos;
+	int h, w;
+
+	public Rect(int x, int y, int w, int h) {
+
+		this.pos = new Point(x, y);
+		this.h = h;
+		this.w = w;
+
+	}
+
+	public boolean intersects(Rect r) {
+		return (pos.inside(r) || new Point(pos.x + w, pos.y).inside(r) || new Point(pos.x + w, pos.y + h).inside(r)
+				|| new Point(pos.x, pos.y + h).inside(r));
+	}
 }
