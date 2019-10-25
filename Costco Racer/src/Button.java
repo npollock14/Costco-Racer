@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -6,23 +8,35 @@ class Button {
 	BufferedImage img;
 	int centeringMethod;
 	boolean clicked;
+	String text = "";
+	Font f = new Font("Arial", 0, 12);
+	Color c;
 
-	public Button(Rect bounds, BufferedImage img, int centeringMethod) {
+	public Button(Rect bounds, BufferedImage img, int centeringMethod, String text, Font f, Color c) {
 		super();
 		this.bounds = bounds;
 		this.img = img;
 		this.centeringMethod = centeringMethod;
+		this.text = text;
+		this.f = f;
+		this.c = c;
 	}
+
 	public void update(boolean[] mouse, Point mPos) {
-		if(mouse[1] && mPos.inside(bounds)) {
+		if (mouse[1] && mPos.inside(bounds)) {
 			clicked = true;
-		}else {
+		} else {
 			clicked = false;
 		}
 	}
-	public void draw(Graphics g) {
-		g.drawImage(img, bounds.pos.x, bounds.pos.y, bounds.h, bounds.w, null);
+
+	public void draw(Graphics g, int xOff, int yOff) {
+		g.setColor(c);
+		g.fillRoundRect(bounds.pos.x, bounds.pos.y, bounds.w, bounds.h, 10, 10);
+		g.setColor(Color.black);
 		g.drawRoundRect(bounds.pos.x, bounds.pos.y, bounds.w, bounds.h, 10, 10);
+		g.drawImage(img, bounds.pos.x, bounds.pos.y, bounds.w < bounds.h ? bounds.w : bounds.h, bounds.w < bounds.h ? bounds.w : bounds.h, null);
+		g.drawString(text, bounds.pos.x + xOff, bounds.pos.y + yOff);
 	}
 
 }

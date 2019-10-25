@@ -14,10 +14,13 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import sun.applet.Main;
 
 public class CostcoRacerMain extends JPanel
 		implements ActionListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
@@ -29,15 +32,13 @@ public class CostcoRacerMain extends JPanel
 	static boolean[] mouse = new boolean[200];
 	static Point mPos;
 	MenuState m = new MenuState();
-	Font f = new Font("PixelFJVerdana12pt", 1, 72);
+	static Font f = new Font("Press Start", 0, 48);
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		m.draw(g);
-		g.setFont(f);
-		g.drawString("Hello", 200, 200);
 
 	}
 
@@ -49,13 +50,11 @@ public class CostcoRacerMain extends JPanel
 	}
 
 	private void init() {
-		try {
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("/PixelFJVerdana12pt.ttf")));
-		} catch (IOException | FontFormatException e) {
-			System.out.println("failed");
-			// Handle exception
-		}
+		GraphicsEnvironment ge = null;
+	    try{
+	      ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("prstart.TTF")));
+	    } catch(FontFormatException e){} catch (IOException e){}
 		for(String s : GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()) {
 			System.out.println(s);
 		}
