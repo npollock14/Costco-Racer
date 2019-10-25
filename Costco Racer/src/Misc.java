@@ -9,7 +9,7 @@ public class Misc {
 	public BufferedImage getImage(String fileName) {
 		BufferedImage img = null;
 		try {
-		    img = ImageIO.read(new File("strawberry.jpg"));
+		    img = ImageIO.read(new File(fileName));
 		} catch (IOException e) {
 			return img;
 		}

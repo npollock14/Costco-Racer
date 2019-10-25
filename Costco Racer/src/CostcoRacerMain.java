@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,12 +25,13 @@ public class CostcoRacerMain extends JPanel
 	boolean[] keysToggled = new boolean[300];
 	boolean[] mouse = new boolean[200];
 	Misc misc = new Misc();
+	BufferedImage img;
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		
+		g.drawImage(img, 500, 500, null);
 	}
 
 	public void update() throws InterruptedException {
@@ -37,6 +39,7 @@ public class CostcoRacerMain extends JPanel
 	}
 
 	private void init() {
+	misc.getImage("/Res/strawberry");
 		
 	}
 
