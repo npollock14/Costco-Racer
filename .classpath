@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Costco Racer/src"/>
+	<classpathentry kind="lib" path="Res"/>
 	<classpathentry kind="output" path="Costco Racer/bin"/>
 </classpath>

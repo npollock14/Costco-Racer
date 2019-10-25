@@ -1,22 +1,20 @@
+
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 public class Misc {
 
-	public BufferedImage getImage(String fileName) {
-		BufferedImage img = null;
+	public static BufferedImage loadImage(String path) {
 		try {
-		    img = ImageIO.read(new File(fileName));
+			return ImageIO.read(Misc.class.getResource(path));
 		} catch (IOException e) {
-			return img;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(1); // if image is not loaded dont run game
 		}
-		return img;
+		return null;
 	}
-	
-	
-	
-	
+
 }
