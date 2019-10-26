@@ -35,8 +35,8 @@ class Button {
 		g.fillRoundRect(bounds.pos.x, bounds.pos.y, bounds.w, bounds.h, 10, 10);
 		g.setColor(Color.black);
 		g.drawRoundRect(bounds.pos.x, bounds.pos.y, bounds.w, bounds.h, 10, 10);
-		g.drawImage(img, bounds.pos.x, bounds.pos.y, bounds.w < bounds.h ? bounds.w : bounds.h, bounds.w < bounds.h ? bounds.w : bounds.h, null);
-		g.drawString(text, bounds.pos.x + xOff, bounds.pos.y + yOff);
+		if(img!=null) g.drawImage(img, bounds.pos.x, bounds.pos.y, bounds.w < bounds.h ? bounds.w : bounds.h, bounds.w < bounds.h ? bounds.w : bounds.h, null);
+		if(text!=null)g.drawString(text, bounds.pos.x + xOff, bounds.pos.y + yOff);
 	}
 
 }

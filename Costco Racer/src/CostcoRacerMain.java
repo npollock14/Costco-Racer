@@ -55,9 +55,9 @@ public class CostcoRacerMain extends JPanel
 	      ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("prstart.TTF")));
 	    } catch(FontFormatException e){} catch (IOException e){}
-		for(String s : GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()) {
-			System.out.println(s);
-		}
+//		for(String s : GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()) {
+//			System.out.println(s);
+//		}
 		m.init();
 
 	}
@@ -74,10 +74,6 @@ public class CostcoRacerMain extends JPanel
 
 	public static boolean[] getMouse() {
 		return mouse;
-	}
-
-	public void setMouse(boolean[] mouse) {
-		this.mouse = mouse;
 	}
 
 	@Override
