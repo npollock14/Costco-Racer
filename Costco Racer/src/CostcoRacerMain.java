@@ -30,10 +30,11 @@ public class CostcoRacerMain extends JPanel
 	static boolean[] keys = new boolean[300];
 	static boolean[] keysToggled = new boolean[300];
 	static boolean[] mouse = new boolean[200];
+	static boolean[] mouseReleased = new boolean[20];
 	static Point mPos;
 	MenuState m = new MenuState();
-	SettingsState s = new SettingsState();
-	GameState g = new GameState();
+	SettingsState settings = new SettingsState();
+	GameState game = new GameState();
 	static Font f = new Font("Press Start", 0, 48);
 	static int state = 0;
 
@@ -42,8 +43,8 @@ public class CostcoRacerMain extends JPanel
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		if(state == 0) m.draw(g);
-		if(state == 1) m.draw(g);
-		if(state == 2) m.draw(g);
+		if(state == 1) game.draw(g);
+		if(state == 2) settings.draw(g);
 
 	}
 
@@ -51,9 +52,13 @@ public class CostcoRacerMain extends JPanel
 		mPos = getMousePos();
 		//System.out.println(mPos.toStr());
 		if(state == 0) m.update();
-		if(state == 1) m.update();
-		if(state == 2) m.update();
+		if(state == 1) game.update();
+		if(state == 2) settings.update();
 
+		for(boolean b : mouseReleased) {
+			if(b) System.out.println(b);
+			b = false;
+		}
 	}
 
 	private void init() {
@@ -66,6 +71,8 @@ public class CostcoRacerMain extends JPanel
 //			System.out.println(s);
 //		}
 		m.init();
+		settings.init();
+		game.init();
 
 	}
 
@@ -187,6 +194,7 @@ public class CostcoRacerMain extends JPanel
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		mouse[e.getButton()] = false;
+		mouseReleased[e.getButton()] = true;
 	}
 
 	@Override
