@@ -23,6 +23,9 @@ Font f;
 		b1.update(mouse, mPos);
 		b2.update(mouse, mPos);
 		
+		if(b1.clicked) CostcoRacerMain.state = 1;
+		if(b2.clicked) CostcoRacerMain.state = 2;
+		
 	}
 
 	@Override

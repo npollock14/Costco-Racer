@@ -32,20 +32,27 @@ public class CostcoRacerMain extends JPanel
 	static boolean[] mouse = new boolean[200];
 	static Point mPos;
 	MenuState m = new MenuState();
+	SettingsState s = new SettingsState();
+	GameState g = new GameState();
 	static Font f = new Font("Press Start", 0, 48);
+	static int state = 0;
 
 	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		m.draw(g);
+		if(state == 0) m.draw(g);
+		if(state == 1) m.draw(g);
+		if(state == 2) m.draw(g);
 
 	}
 
 	public void update() throws InterruptedException {
 		mPos = getMousePos();
 		//System.out.println(mPos.toStr());
-		m.update();
+		if(state == 0) m.update();
+		if(state == 1) m.update();
+		if(state == 2) m.update();
 
 	}
 
