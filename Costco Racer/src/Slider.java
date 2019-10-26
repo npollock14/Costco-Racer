@@ -14,7 +14,7 @@ public class Slider {
 		this.pos = pos;
 		this.w = w;
 		if(initValue < 0 || initValue > 1) throw new IllegalArgumentException("Initial Value Out of Range Exception");
-		b = new Button(new Rect((int)(((double)w*initValue) + pos.x - bw/2), pos.y - bh/2, bw, bh), null, 1,null, CostcoRacerMain.f, c);
+		b = new Button(new Rect((int)(((double)w*initValue) + pos.x - bw/2), pos.y - bh/2, bw, bh), null, 1,null, CostcoRacerMain.f, c, false);
 		this.bw = bw;
 		this.bh = bh;
 	}

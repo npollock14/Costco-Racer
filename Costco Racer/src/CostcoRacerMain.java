@@ -106,7 +106,7 @@ public class CostcoRacerMain extends JPanel
 
 	public CostcoRacerMain() {
 		JFrame f = new JFrame();
-		f.setTitle("Game Name Here");
+		f.setTitle("Costco Racer");
 		f.setSize(screenWidth, screenHeight);
 		f.setBackground(Color.BLACK);
 		f.setResizable(false);
