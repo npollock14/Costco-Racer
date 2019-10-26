@@ -34,7 +34,7 @@ Font f;
 		b2.draw(g, 20, 75);
 		
 		g.drawImage(titleImage2, 30, 10, (int)(titleImage.getWidth()/.75), (int) (titleImage.getHeight()/1), null);
-		g.drawImage(titleImage, 30, 450, titleImage.getWidth()/2, titleImage.getHeight()/2, null);
+		g.drawImage(titleImage, 30, 500, titleImage.getWidth()/2, titleImage.getHeight()/2, null);
 		
 		
 	}
