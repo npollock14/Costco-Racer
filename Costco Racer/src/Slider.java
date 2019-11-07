@@ -19,8 +19,8 @@ public class Slider {
 		this.bh = bh;
 	}
 
-	public void update(boolean[] mouse, Point mPos) {
-		b.update(mouse, mPos);
+	public void update(boolean[] mouse, Point mPos, boolean[] mouseReleased) {
+		b.update(mouse, mPos, mouseReleased);
 if(b.clicked || moving) {
 	b.bounds = new Rect(mPos.x - bw/2, pos.y - bh/2, bw, bh);
 	if(b.bounds.pos.x > pos.x + w - bw/2) b.bounds.pos.x = pos.x + w - bw/2;

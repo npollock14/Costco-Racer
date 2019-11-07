@@ -9,6 +9,7 @@ Button bMenu;
 boolean[] keys = new boolean[300];
 boolean[] keysToggled = new boolean[300];
 boolean[] mouse = new boolean[200];
+boolean[] mouseReleased = new boolean[200];
 BufferedImage img;
 BufferedImage titleImage;
 BufferedImage titleImage2;
@@ -19,7 +20,7 @@ Font f;
 		keys = CostcoRacerMain.getKeys();
 		keysToggled = CostcoRacerMain.getKeysToggled();
 		mouse = CostcoRacerMain.getMouse();
-		bMenu.update(mouse, mPos);
+		bMenu.update(mouse, mPos, mouseReleased);
 		
 		if(bMenu.clicked) CostcoRacerMain.state = 0;
 		

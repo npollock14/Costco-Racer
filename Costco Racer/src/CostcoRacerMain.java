@@ -30,7 +30,7 @@ public class CostcoRacerMain extends JPanel
 	static boolean[] keys = new boolean[300];
 	static boolean[] keysToggled = new boolean[300];
 	static boolean[] mouse = new boolean[200];
-	static boolean[] mouseReleased = new boolean[20];
+	static boolean[] mouseReleased = new boolean[10];
 	static Point mPos;
 	MenuState m = new MenuState();
 	SettingsState settings = new SettingsState();
@@ -54,11 +54,7 @@ public class CostcoRacerMain extends JPanel
 		if(state == 0) m.update();
 		if(state == 1) game.update();
 		if(state == 2) settings.update();
-
-		for(boolean b : mouseReleased) {
-			if(b) System.out.println(b);
-			b = false;
-		}
+		if(mouseReleased[1]) System.out.println("true");
 	}
 
 	private void init() {
