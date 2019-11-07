@@ -38,7 +38,7 @@ public class CostcoRacerMain extends JPanel
 	static Font f = new Font("Press Start", 0, 48);
 	static int state = 0;
 
-	// ============== end of settings ===================
+	// ============== end of settings ==================
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
